@@ -8,7 +8,7 @@ import warnings
 os.chdir("C:\Workspace\PythonWS\QyjsCompare\Table") # 更改工作目录
 # print(os.getcwd()) # 打印当前工作目录
 start = time.time()
-
+#####
 #————————————————————————————————————————————————————————————————————————————————————————————-
 print("开始读取输入表格")
 

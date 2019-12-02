@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://C:\Workspace\PythonWS\LinkRouteBJ\.idea\JiBao.iml" filepath="C:\Workspace\PythonWS\LinkRouteBJ\.idea\JiBao.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../JiBaoHandle/.idea/JiBaoHandle.iml" filepath="$PROJECT_DIR$/../JiBaoHandle/.idea/JiBaoHandle.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../JiBaoPhoto/.idea/JiBaoPhoto.iml" filepath="$PROJECT_DIR$/../JiBaoPhoto/.idea/JiBaoPhoto.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../JiBaoProRoute/.idea/JiBaoProRoute.iml" filepath="$PROJECT_DIR$/../JiBaoProRoute/.idea/JiBaoProRoute.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../JiBaoYunLiang/.idea/JiBaoYunLiang.iml" filepath="$PROJECT_DIR$/../JiBaoYunLiang/.idea/JiBaoYunLiang.iml" />
+      <module fileurl="file://C:\Workspace\PythonWS\QyjsCompare\.idea\LinkRouteBJ.iml" filepath="C:\Workspace\PythonWS\QyjsCompare\.idea\LinkRouteBJ.iml" />
+      <module fileurl="file://C:\Workspace\PythonWS\One\.idea\One.iml" filepath="C:\Workspace\PythonWS\One\.idea\One.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/QyjsCompare.iml" filepath="$PROJECT_DIR$/.idea/QyjsCompare.iml" />
+      <module fileurl="file://C:\Workspace\PythonWS\Test\.idea\Test.iml" filepath="C:\Workspace\PythonWS\Test\.idea\Test.iml" />
+      <module fileurl="file://C:\Workspace\PythonWS\untitled\.idea\untitled.iml" filepath="C:\Workspace\PythonWS\untitled\.idea\untitled.iml" />
+    </modules>
+  </component>
+</project>

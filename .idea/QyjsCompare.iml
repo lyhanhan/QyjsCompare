@@ -15,6 +15,7 @@
     <orderEntry type="module" module-name="JiBaoProRoute" />
     <orderEntry type="module" module-name="JiBaoProRoute" />
     <orderEntry type="module" module-name="JiBaoProRoute" />
+    <orderEntry type="module" module-name="JiBao" />
   </component>
   <component name="TestRunnerService">
     <option name="PROJECT_TEST_RUNNER" value="不至于" />

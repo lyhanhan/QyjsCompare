@@ -57,7 +57,7 @@ print("以成本最低方式计算车型")
 weight = pd.read_csv("weight.csv",encoding = 'UTF-8')
 trans_cost = pr.transport_cost(hub_list, weight, distance)
 cost_detail = pr.output(hub_list,trans_cost)
-cost_detail.to_csv("cost_detail.csv",encoding = 'utf_8_sig',index = 0)
+cost_detail.to_csv("cost_detail_现状.csv",encoding = 'utf_8_sig',index = 0)
 end = time.time()
 print("结果已输出，总用时：",(end-start))
 # #————————————————————————————————————————————————————————————————————————————————————————————-

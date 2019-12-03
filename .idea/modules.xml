@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../JiBao/.idea/JiBao.iml" filepath="$PROJECT_DIR$/../JiBao/.idea/JiBao.iml" />
       <module fileurl="file://C:\Workspace\PythonWS\LinkRouteBJ\.idea\JiBao.iml" filepath="C:\Workspace\PythonWS\LinkRouteBJ\.idea\JiBao.iml" />
       <module fileurl="file://$PROJECT_DIR$/../JiBaoHandle/.idea/JiBaoHandle.iml" filepath="$PROJECT_DIR$/../JiBaoHandle/.idea/JiBaoHandle.iml" />
       <module fileurl="file://$PROJECT_DIR$/../JiBaoPhoto/.idea/JiBaoPhoto.iml" filepath="$PROJECT_DIR$/../JiBaoPhoto/.idea/JiBaoPhoto.iml" />

@@ -16,8 +16,8 @@ def yunliang(flow,route,hub_list):
     hubs = list(hubs)     #列表化
     yunliang_matrix =  [[0 for col in range(hub_num)] for row in range(hub_num)]  #初始化运量矩阵
     yunliang = pd.DataFrame()    #初始化运量表
-    chuliliang_list = [0] * hub_num        #初始化处理量列表
-    chuliliang = pd.DataFrame()    #初始化处理量表
+    #chuliliang_list = [0] * hub_num        #初始化处理量列表
+    #chuliliang = pd.DataFrame()    #初始化处理量表
 
     route_row = route.shape[0]    #统计路由行数
     for i in range(0,route_row):
@@ -28,20 +28,20 @@ def yunliang(flow,route,hub_list):
         cflist_length = len(cflist)   #统计该数组长度
         for j in range(0,cflist_length-1):
             yunliang_matrix[hubs.index(cflist[j])][hubs.index(cflist[j+1])] += flow_value   #从0-倒数第二个元素，逐一添加城市对的运量
-            chuliliang_list[hubs.index(cflist[j])] += flow_value #从0-倒数第二个元素，逐一添加城市的处理量
+            #chuliliang_list[hubs.index(cflist[j])] += flow_value #从0-倒数第二个元素，逐一添加城市的处理量
 
-        chuliliang_list[hubs.index(cflist[cflist_length-1])] += flow_value  #循环结束，补充添加最后一个元素城市的处理量
+        #chuliliang_list[hubs.index(cflist[cflist_length-1])] += flow_value  #循环结束，补充添加最后一个元素城市的处理量
 
     for i in range(0,hub_num):
-        temp_tongcheng = flow[flow.收寄城市 == hubs[i]]     #筛选同城处理量
-        temp_tongcheng = temp_tongcheng[temp_tongcheng.寄达城市 == hubs[i]]   #筛选同城处理量
-        if(temp_tongcheng.shape[0]!=0):
-            chuliliang_list[i] += temp_tongcheng.iloc[0,2]    #添加同城处理量
-
-        chuliliang = chuliliang.append([[hubs[i],chuliliang_list[i]]])
+        # temp_tongcheng = flow[flow.收寄城市 == hubs[i]]     #筛选同城处理量
+        # temp_tongcheng = temp_tongcheng[temp_tongcheng.寄达城市 == hubs[i]]   #筛选同城处理量
+        # if(temp_tongcheng.shape[0]!=0):
+        #     chuliliang_list[i] += temp_tongcheng.iloc[0,2]    #添加同城处理量
+        #
+        # chuliliang = chuliliang.append([[hubs[i],chuliliang_list[i]]])
         for j in range(0,hub_num):
             yunliang = yunliang.append([[hubs[i],hubs[j],yunliang_matrix[i][j]]])
-    return yunliang, chuliliang
+    return yunliang
 
 
 #集包件与大件运量的总重量计算
@@ -143,19 +143,19 @@ def transport(final_truck_list, distance_1, distance_2, driver_num_1, driver_num
     #去边运量委办邮路运输成本 = 折旧+路桥+其他费用+
                  #油耗费用+
                  #司机费用（各类车型分别乘对应系数）
-    truck_cost_2 = distance_1 * ((final_truck_list[0][0]) * (pa.GL_DEP[2] + pa.GL_LQ[2] + pa.GL_OTHER[2]) * pa.GL_K[0]+ (final_truck_list[0][1]) * (pa.GL_DEP[1] + pa.GL_LQ[1] + pa.GL_OTHER[1]) * pa.GL_K[1]+ (final_truck_list[0][2]) * (pa.GL_DEP[0] + pa.GL_LQ[0] + pa.GL_OTHER[0]) * pa.GL_K[2]) + \
-                   distance_1 * (final_truck_list[0][0] * pa.GL_OIL[2] * pa.GL_K[0] + final_truck_list[0][1] * pa.GL_OIL[1] * pa.GL_K[1] + final_truck_list[0][2] * pa.GL_OIL[0]) * pa.GL_K[2] + \
-                   ((distance_1 / pa.GL_V[2]) * driver_num_1 * pa.GL_LABOR[2] * final_truck_list[0][0] * pa.GL_K[0]) + \
+    truck_cost_2 = distance_1 * ((final_truck_list[0][0]) * (pa.GL_DEP[2] + pa.GL_LQ[2] + pa.GL_OTHER[2]) * pa.GL_K[2]+ (final_truck_list[0][1]) * (pa.GL_DEP[1] + pa.GL_LQ[1] + pa.GL_OTHER[1]) * pa.GL_K[1]+ (final_truck_list[0][2]) * (pa.GL_DEP[0] + pa.GL_LQ[0] + pa.GL_OTHER[0]) * pa.GL_K[0]) + \
+                   distance_1 * (final_truck_list[0][0] * pa.GL_OIL[2] * pa.GL_K[2] + final_truck_list[0][1] * pa.GL_OIL[1] * pa.GL_K[1] + final_truck_list[0][2] * pa.GL_OIL[0]* pa.GL_K[0])  + \
+                   ((distance_1 / pa.GL_V[2]) * driver_num_1 * pa.GL_LABOR[2] * final_truck_list[0][0] * pa.GL_K[2]) + \
                    ((distance_1 / pa.GL_V[1]) * driver_num_1 * pa.GL_LABOR[1] * final_truck_list[0][1] * pa.GL_K[1]) + \
-                   ((distance_1 / pa.GL_V[0]) * driver_num_1 * pa.GL_LABOR[0] * final_truck_list[0][2] * pa.GL_K[2])
+                   ((distance_1 / pa.GL_V[0]) * driver_num_1 * pa.GL_LABOR[0] * final_truck_list[0][2] * pa.GL_K[0])
     #回边运量委办邮路运输成本 = 折旧+路桥+其他费用+
                  #油耗费用+
                  #司机费用（各类车型分别乘对应系数）
     truck_cost_3 = distance_2 * ((final_truck_list[1][0]) * (pa.GL_DEP[2] + pa.GL_LQ[2] + pa.GL_OTHER[2]) * pa.GL_K[0]+ (final_truck_list[1][1]) * (pa.GL_DEP[1] + pa.GL_LQ[1] + pa.GL_OTHER[1]) * pa.GL_K[1]+ (final_truck_list[1][2]) * (pa.GL_DEP[0] + pa.GL_LQ[0] + pa.GL_OTHER[0]) * pa.GL_K[2]) + \
-                   distance_2 * (final_truck_list[1][0] * pa.GL_OIL[2] * pa.GL_K[0] + final_truck_list[1][1] * pa.GL_OIL[1] * pa.GL_K[1] + final_truck_list[1][2] * pa.GL_OIL[0]) * pa.GL_K[2] + \
-                   ((distance_2 / pa.GL_V[2]) * driver_num_2 * pa.GL_LABOR[2] * final_truck_list[1][0] * pa.GL_K[0]) + \
+                   distance_2 * (final_truck_list[1][0] * pa.GL_OIL[2] * pa.GL_K[0] + final_truck_list[1][1] * pa.GL_OIL[1] * pa.GL_K[1] + final_truck_list[1][2] * pa.GL_OIL[0] * pa.GL_K[2]) + \
+                   ((distance_2 / pa.GL_V[2]) * driver_num_2 * pa.GL_LABOR[2] * final_truck_list[1][0] * pa.GL_K[2]) + \
                    ((distance_2 / pa.GL_V[1]) * driver_num_2 * pa.GL_LABOR[1] * final_truck_list[1][1] * pa.GL_K[1]) + \
-                   ((distance_2 / pa.GL_V[0]) * driver_num_2 * pa.GL_LABOR[0] * final_truck_list[1][2] * pa.GL_K[2])
+                   ((distance_2 / pa.GL_V[0]) * driver_num_2 * pa.GL_LABOR[0] * final_truck_list[1][2] * pa.GL_K[0])
     truck_cost = truck_cost_1 + truck_cost_2 + truck_cost_3
     return  truck_cost
 def transport_cost(hub_list, weight, distance):
@@ -221,7 +221,7 @@ def transport_cost(hub_list, weight, distance):
             final_truck_list = []
             final_cost = 1000000000
             k_min = min(k_1,k_2)
-            for z_1 in range(1,int(k_min)):
+            for z_1 in range(0,int(k_min)):
                 for z_2 in range(min(m_2,int(k_min) - z_1)):
                     for z_3 in range(min(m_3,int(k_min) - z_1 - z_2)):
                         for x_1 in range(max(0,k_1-1-z_1-m_2-m_3),int(k_1) - z_1 - z_2 - z_3):
@@ -244,10 +244,13 @@ def transport_cost(hub_list, weight, distance):
 
             final_truck_list_1 = [final_truck_list[0],[0,0,0],final_truck_list[2]]
             final_cost_1 = transport(final_truck_list_1, distance_1, 0, driver_num_1, 0)
+
             trans_cost = trans_cost.append([[pair[0], pair[1], final_truck_list_1[0][0], final_truck_list_1[0][1], final_truck_list_1[0][2], final_truck_list_1[2][0], final_truck_list_1[2][1], final_truck_list_1[2][2], distance_1, final_cost_1,'大' if weight_1 > weight_2 else '小']])
+
             final_truck_list_2 = [[0,0,0],final_truck_list[1],final_truck_list[2]]
             final_cost_2 = transport(final_truck_list_2, 0, distance_2, 0, driver_num_2)
-            trans_cost = trans_cost.append([[pair[1], pair[0],  final_truck_list_1[1][0], final_truck_list_1[1][1], final_truck_list_1[1][2], final_truck_list_1[2][0], final_truck_list_1[2][1], final_truck_list_1[2][2], distance_2, final_cost_2,'大' if weight_2 > weight_1 else '小']])
+
+            trans_cost = trans_cost.append([[pair[1], pair[0],  final_truck_list_2[1][0], final_truck_list_2[1][1], final_truck_list_2[1][2], final_truck_list_2[2][0], final_truck_list_2[2][1], final_truck_list_2[2][2], distance_2, final_cost_2,'大' if weight_2 > weight_1 else '小']])
     trans_cost = pd.DataFrame(np.array(trans_cost), columns = ['收寄城市', '寄达城市', '委办_40t','委办_20t','委办_12t', '自办_40t','自办_20t','自办_12t','城市间距离','车辆成本','大小边标记'])
     return trans_cost
 

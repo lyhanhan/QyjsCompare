@@ -11,9 +11,9 @@ start = time.time()
 print("开始读取输入表格")
 #读取输入表格
 flow = pd.read_csv("flow.csv",encoding = 'UTF-8')
-route = pd.read_csv("route.csv",encoding = 'UTF-8')
+route = pd.read_csv("route_层级集散_40_80%_40%_无route2.csv",encoding = 'UTF-8')
 distance = pd.read_csv("85中心局之间的距离.csv",encoding = 'UTF-8')
-cost_detail = pd.read_csv("cost_detail_现状.csv",encoding = 'UTF-8')
+cost_detail = pd.read_csv("cost_detail_层级集散_40_80%_40%.csv",encoding = 'UTF-8')
 end = time.time()
 print("输入表格读取完毕，总用时：",(end-start))
 #————————————————————————————————————————————————————————————————————————————————————————————-
@@ -31,6 +31,9 @@ def statistics(flow,route,distance,cost_detail):
     total_flow = total_data['总流量'].sum()
     total_data['加权距离'] = total_data.apply(lambda x: x['总距离'] * x['总流量'] / total_flow,axis = 1 )
     total_data['加权经转次数'] =  total_data.apply(lambda x:x['经转次数']*x['总流量']/total_flow,axis = 1 )
+
+    transport_cost = cost_detail['车辆成本'].sum()
+    statistics = statistics.append([['运输成本', transport_cost]])
 
     per_yunj =  total_data['加权距离'].sum()
     statistics = statistics.append([['平均运距',per_yunj]])
@@ -71,8 +74,8 @@ def statistics(flow,route,distance,cost_detail):
 #————————————————————————————————————————————————————————————————————————————————————————————-
 print("计算输出")
 statis,total_data = statistics(flow,route,distance,cost_detail)
-statis.to_csv("统计结果.csv",index = 0, encoding = 'utf_8_sig')
-total_data.to_csv("统计总表.csv",index = 0, encoding = 'utf_8_sig')
+statis.to_csv("统计结果_层级集散_40_80%_40%_无route2.csv",index = 0, encoding = 'utf_8_sig')
+total_data.to_csv("统计总表_层级集散_40_80%_40%_无route2.csv",index = 0, encoding = 'utf_8_sig')
 end = time.time()
 print("计算输出完毕，总用时：",(end-start))
 #————————————————————————————————————————————————————————————————————————————————————————————-
